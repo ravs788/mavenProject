@@ -27,7 +27,7 @@ public class TestCases {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		l.logIn("ravs788@gmail.com", "------");
+		l.logIn("ravs788@gmail.com", "----");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
