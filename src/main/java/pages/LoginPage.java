@@ -15,7 +15,7 @@ public class LoginPage {
 	private String passWordTxtBx = "//input[@id='password']";
 	By locatorPassWordTxtBx = By.xpath(passWordTxtBx);
 
-	private String loginBtn = "//input[@value='LOGIN']";
+	private String loginBtn = "//input[@value='Login']";
 	By locatorLoginBtn = By.xpath(loginBtn);
 	
 	private String loginPageLogo = "//div[@class='login_logo']";
@@ -27,7 +27,7 @@ public class LoginPage {
 	}
 
 
-	public boolean logIn(String sUserName, String sPassword){
+	public boolean logIn(String sUserName, String sPassword) throws InterruptedException{
 
 		
 		objWrapper.setTextValue(driver, driver.findElement(locatorUserName), sUserName);		

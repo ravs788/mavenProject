@@ -11,11 +11,12 @@ public class Wrapper {
 	public Wrapper(){
 	}
 
-	public void click(WebDriver driver,WebElement element){
+	public void click(WebDriver driver,WebElement element) throws InterruptedException{
 		//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		if(element.isDisplayed() && element.isEnabled())
 		{
 			element.click();
+			Thread.sleep(5000);
 		}
 	}
 

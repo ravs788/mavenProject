@@ -24,7 +24,7 @@ public class MainPage {
 	}
 
 
-	public boolean logOut(){
+	public boolean logOut() throws InterruptedException{
 
 		objWrapper.click(driver, driver.findElement(locatorOpenMenu));
 		objWrapper.click(driver, driver.findElement(locatorLogOut));
