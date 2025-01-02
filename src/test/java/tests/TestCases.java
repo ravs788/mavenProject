@@ -18,11 +18,11 @@ public class TestCases {
 	public static void setUpFunction(){
 		BaseClass b = new BaseClass();
 		driver = b.setUpFunction("Chrome");
-		driver.get("https://www.saucedemo.com/index.html");
+		driver.get("https://www.saucedemo.com");
 	}
 	
 	@Test
-	public static void TestCase1(){
+	public static void TestCase1() throws InterruptedException{
 		LoginPage loginPage = new LoginPage(driver);
 		MainPage mainPage = new MainPage(driver);
 		
@@ -32,7 +32,7 @@ public class TestCases {
 	}
 	
 	@Test
-	public static void TestCase2(){
+	public static void TestCase2() throws InterruptedException{
 		LoginPage loginPage = new LoginPage(driver);
 		MainPage mainPage = new MainPage(driver);
 		
