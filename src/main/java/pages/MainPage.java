@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import wrapper.Wrapper;
 
@@ -26,19 +27,26 @@ public class MainPage {
 
 	public boolean logOut() throws InterruptedException{
 
-		objWrapper.click(driver, driver.findElement(locatorOpenMenu));
-		objWrapper.click(driver, driver.findElement(locatorLogOut));
-		
+		if (objWrapper.Wait(driver, locatorOpenMenu))
+		{
+			objWrapper.click(driver, driver.findElement(locatorOpenMenu));
+		}
+		if (objWrapper.Wait(driver, locatorLogOut))
+		{
+			objWrapper.click(driver, driver.findElement(locatorLogOut));
+		}
 		LoginPage loginPage = new LoginPage(driver);
-		return loginPage.VerifyLoginPage();
+		return loginPage.verifyLoginPage();
 	}
 
-	public boolean VerifyLoginSuccessful()
+	public boolean verifyLoginSuccessful()
 	{
-		if(objWrapper.elementVisible(driver.findElement(locatorMainPageHeaderEle)))
-			return true;
-		else
-			return false;
+		boolean eleFound = objWrapper.Wait(driver, locatorMainPageHeaderEle);
+		if(eleFound)
+		{
+			return eleFound;
+		}
+		return false;
 	}
 
 }
