@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import wrapper.Wrapper;
 
@@ -32,19 +33,24 @@ public class LoginPage {
 		
 		objWrapper.setTextValue(driver, driver.findElement(locatorUserName), sUserName);		
 		objWrapper.setTextValue(driver, driver.findElement(locatorPassWordTxtBx), sPassword);
-		objWrapper.click(driver, driver.findElement(locatorLoginBtn));
+		if (objWrapper.Wait(driver, locatorLoginBtn))
+		{
+			objWrapper.click(driver, driver.findElement(locatorLoginBtn));
+		}	
 		
 		MainPage mainPage = new MainPage(driver);
-		return mainPage.VerifyLoginSuccessful();
+		return mainPage.verifyLoginSuccessful();
 	
 	}
 
-	public boolean VerifyLoginPage()
+	public boolean verifyLoginPage()
 	{
-		if(objWrapper.elementVisible(driver.findElement(locatorLoginLogo)))
-			return true;
-		else
-			return false;
+		boolean eleFound = objWrapper.Wait(driver, locatorLoginLogo);
+		if (eleFound)
+		{
+			return eleFound;
+		}
+		return false;
 	}
 	
 
