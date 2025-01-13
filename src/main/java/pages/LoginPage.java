@@ -1,14 +1,23 @@
 package pages;
 
+import jakarta.annotation.PostConstruct;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import base.BaseClass;
 import wrapper.Wrapper;
 
-public class LoginPage {
-	private WebDriver driver = null;
-	private Wrapper objWrapper = null;
+@Component
+public class LoginPage extends BaseClass{
+
+
+	@Autowired
+	private MainPage mainPage;
+
+	@Autowired
+	private Wrapper objWrapper;
 
 	private String userNameTxtBx = "//input[@id='user-name']";
 	By locatorUserName = By.xpath(userNameTxtBx);
@@ -22,35 +31,32 @@ public class LoginPage {
 	private String loginPageLogo = "//div[@class='login_logo']";
 	By locatorLoginLogo = By.xpath(loginPageLogo);
 
-	public LoginPage(WebDriver driver){
-		this.driver = driver;
-		this.objWrapper = new Wrapper();
-	}
 
+	public boolean logIn(WebDriver driver, String sUserName, String sPassword){
 
-	public boolean logIn(String sUserName, String sPassword) throws InterruptedException{
-
-		
 		objWrapper.setTextValue(driver, driver.findElement(locatorUserName), sUserName);		
 		objWrapper.setTextValue(driver, driver.findElement(locatorPassWordTxtBx), sPassword);
-		if (objWrapper.Wait(driver, locatorLoginBtn))
+		if (objWrapper.waitOperation(driver, locatorLoginBtn))
 		{
 			objWrapper.click(driver, driver.findElement(locatorLoginBtn));
 		}	
+		// driver.findElement(locatorUserName).sendKeys(sUserName);
+		// driver.findElement(locatorPassWordTxtBx).sendKeys(sPassword);
+		// driver.findElement(locatorLoginBtn).click();
 		
-		MainPage mainPage = new MainPage(driver);
-		return mainPage.verifyLoginSuccessful();
+		return mainPage.verifyLoginSuccessful(driver);
 	
 	}
 
-	public boolean verifyLoginPage()
+	public boolean verifyLoginPage(WebDriver driver)
 	{
-		boolean eleFound = objWrapper.Wait(driver, locatorLoginLogo);
-		if (eleFound)
-		{
-			return eleFound;
-		}
-		return false;
+		// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(locatorLoginBtn));
+		// List<WebElement> lstElements = driver.findElements(locatorLoginBtn);
+		// return lstElements.isEmpty() ? true: false;
+
+		return objWrapper.waitOperation(driver, locatorLoginBtn);
+			
 	}
 	
 

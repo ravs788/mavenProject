@@ -1,14 +1,29 @@
 package pages;
 
+
+import java.time.Duration;
+import java.util.List;
+
+import jakarta.annotation.PostConstruct;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import base.BaseClass;
 import wrapper.Wrapper;
 
-public class MainPage {
-	private WebDriver driver = null;
-	private Wrapper objWrapper = null;
+@Component
+public class MainPage extends BaseClass{
+
+	@Autowired
+	private LoginPage loginPage;
+
+	@Autowired
+	private Wrapper objWrapper;
 
 	private String OpenMenuBtn = "//button[text()='Open Menu']";
 	By locatorOpenMenu = By.xpath(OpenMenuBtn);
@@ -19,34 +34,33 @@ public class MainPage {
 	private String MainPageHeaderEle = "//div[@class='app_logo']";
 	By locatorMainPageHeaderEle = By.xpath(MainPageHeaderEle);	
 
-	public MainPage(WebDriver driver){
-		this.driver = driver;
-		this.objWrapper = new Wrapper();
-	}
+	public boolean logOut(WebDriver driver){
 
-
-	public boolean logOut() throws InterruptedException{
-
-		if (objWrapper.Wait(driver, locatorOpenMenu))
+		if (objWrapper.waitOperation(driver, locatorOpenMenu))
 		{
 			objWrapper.click(driver, driver.findElement(locatorOpenMenu));
 		}
-		if (objWrapper.Wait(driver, locatorLogOut))
+		if (objWrapper.waitOperation(driver, locatorLogOut))
 		{
 			objWrapper.click(driver, driver.findElement(locatorLogOut));
 		}
-		LoginPage loginPage = new LoginPage(driver);
-		return loginPage.verifyLoginPage();
+
+		// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		// WebElement eleOpenMenu = wait.until(ExpectedConditions.visibilityOfElementLocated(locatorOpenMenu));
+
+		// eleOpenMenu.click();
+		// driver.findElement(locatorLogOut).click();
+
+		return loginPage.verifyLoginPage(driver);
 	}
 
-	public boolean verifyLoginSuccessful()
+	public boolean verifyLoginSuccessful(WebDriver driver)
 	{
-		boolean eleFound = objWrapper.Wait(driver, locatorMainPageHeaderEle);
-		if(eleFound)
-		{
-			return eleFound;
-		}
-		return false;
+		// WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(locatorMainPageHeaderEle));
+		// List<WebElement> lstElements = driver.findElements(locatorMainPageHeaderEle);
+		// return lstElements.isEmpty() ? true : false;
+		return objWrapper.waitOperation(driver, locatorMainPageHeaderEle);
 	}
 
 }
