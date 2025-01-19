@@ -33,7 +33,7 @@ public class LoginPage {
 		
 		objWrapper.setTextValue(driver, driver.findElement(locatorUserName), sUserName);		
 		objWrapper.setTextValue(driver, driver.findElement(locatorPassWordTxtBx), sPassword);
-		if (objWrapper.Wait(driver, locatorLoginBtn))
+		if (objWrapper.waitOperation(driver, locatorLoginBtn))
 		{
 			objWrapper.click(driver, driver.findElement(locatorLoginBtn));
 		}	
@@ -45,7 +45,7 @@ public class LoginPage {
 
 	public boolean verifyLoginPage()
 	{
-		boolean eleFound = objWrapper.Wait(driver, locatorLoginLogo);
+		boolean eleFound = objWrapper.waitOperation(driver, locatorLoginLogo);
 		if (eleFound)
 		{
 			return eleFound;

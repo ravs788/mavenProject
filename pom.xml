@@ -53,6 +53,8 @@
 						<argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
+						<parallel>tests</parallel>
+						<threadCount>5</threadCount>
 					</configuration>
 					<dependencies>
 						<dependency>
