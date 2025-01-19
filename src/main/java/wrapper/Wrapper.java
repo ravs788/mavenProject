@@ -9,15 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Wrapper {
-	private FluentWait<WebDriver> fluentWait;
 
 
 	public void click(WebDriver driver,WebElement element) throws InterruptedException{
-		//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		if(element.isDisplayed() && element.isEnabled())
 		{
 			element.click();
@@ -42,7 +39,7 @@ public class Wrapper {
 		return element.isDisplayed();
 	}
 
-	public boolean Wait(WebDriver driver, By locator)
+	public boolean waitOperation(WebDriver driver, By locator)
 	{		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));

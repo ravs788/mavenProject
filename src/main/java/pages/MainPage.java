@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import wrapper.Wrapper;
 
@@ -10,14 +9,14 @@ public class MainPage {
 	private WebDriver driver = null;
 	private Wrapper objWrapper = null;
 
-	private String OpenMenuBtn = "//button[text()='Open Menu']";
-	By locatorOpenMenu = By.xpath(OpenMenuBtn);
+	private String openMenuBtn = "//button[text()='Open Menu']";
+	By locatorOpenMenu = By.xpath(openMenuBtn);
 
-	private String LogOutBtn = "//a[text()='Logout']";
-	By locatorLogOut = By.xpath(LogOutBtn);
+	private String logOutBtn = "//a[text()='Logout']";
+	By locatorLogOut = By.xpath(logOutBtn);
 
-	private String MainPageHeaderEle = "//div[@class='app_logo']";
-	By locatorMainPageHeaderEle = By.xpath(MainPageHeaderEle);	
+	private String mainPageHeaderEle = "//div[@class='app_logo']";
+	By locatorMainPageHeaderEle = By.xpath(mainPageHeaderEle);	
 
 	public MainPage(WebDriver driver){
 		this.driver = driver;
@@ -27,11 +26,11 @@ public class MainPage {
 
 	public boolean logOut() throws InterruptedException{
 
-		if (objWrapper.Wait(driver, locatorOpenMenu))
+		if (objWrapper.waitOperation(driver, locatorOpenMenu))
 		{
 			objWrapper.click(driver, driver.findElement(locatorOpenMenu));
 		}
-		if (objWrapper.Wait(driver, locatorLogOut))
+		if (objWrapper.waitOperation(driver, locatorLogOut))
 		{
 			objWrapper.click(driver, driver.findElement(locatorLogOut));
 		}
@@ -41,7 +40,7 @@ public class MainPage {
 
 	public boolean verifyLoginSuccessful()
 	{
-		boolean eleFound = objWrapper.Wait(driver, locatorMainPageHeaderEle);
+		boolean eleFound = objWrapper.waitOperation(driver, locatorMainPageHeaderEle);
 		if(eleFound)
 		{
 			return eleFound;
